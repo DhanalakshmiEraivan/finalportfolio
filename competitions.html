@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Competitions | Quadra Froyn Solutions & Technologies</title>
+
+    <meta name="description"
+        content="Explore competitions and challenges organized by Quadra Froyn Solutions and Technologies.">
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+        rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- YOUR MAIN CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        /* =========================================================
+           COMPETITIONS PAGE
+        ========================================================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #fafafa;
+            color: #111118;
+            font-family: "DM Sans", sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .competition-page {
+            overflow: hidden;
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .competition-hero {
+            min-height: 72vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(154, 91, 255, .13),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 70%,
+                    rgba(255, 105, 150, .12),
+                    transparent 30%
+                ),
+                #fafafa;
+        }
+
+        .competition-hero-container {
+            width: min(1180px, 92%);
+            margin: auto;
+
+            position: relative;
+            z-index: 2;
+
+            padding: 130px 0 100px;
+            text-align: center;
+        }
+
+        .competition-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        .competition-label span {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #111118;
+        }
+
+        .competition-hero h1 {
+            margin: 0;
+
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: clamp(65px, 11vw, 150px);
+            line-height: .82;
+
+            letter-spacing: -8px;
+        }
+
+        .competition-hero h1 em {
+            display: block;
+
+            font-family: "Instrument Serif", serif;
+            font-weight: 400;
+            font-style: italic;
+
+            letter-spacing: -3px;
+        }
+
+        .competition-hero-description {
+            max-width: 650px;
+
+            margin: 40px auto 0;
+
+            font-size: 17px;
+            line-height: 1.8;
+
+            color: #666;
+        }
+
+        .hero-scroll {
+            margin-top: 45px;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+
+            color: #999;
+        }
+
+        .hero-scroll i {
+            animation: scrollArrow 1.7s infinite;
+        }
+
+        @keyframes scrollArrow {
+
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(6px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* =========================================================
+           DECORATIVE ELEMENTS
+        ========================================================= */
+
+        .hero-shape {
+            position: absolute;
+
+            border: 1px solid rgba(0,0,0,.07);
+
+            pointer-events: none;
+        }
+
+        .hero-shape-one {
+            width: 260px;
+            height: 260px;
+
+            border-radius: 50%;
+
+            top: 15%;
+            left: -100px;
+        }
+
+        .hero-shape-two {
+            width: 170px;
+            height: 170px;
+
+            border-radius: 50%;
+
+            right: -60px;
+            bottom: 15%;
+        }
+
+        .hero-star {
+            position: absolute;
+
+            font-size: 80px;
+
+            color: rgba(0,0,0,.06);
+
+            right: 12%;
+            top: 25%;
+
+            animation: starRotate 12s linear infinite;
+        }
+
+        @keyframes starRotate {
+
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        /* =========================================================
+           COMPETITION LIST
+        ========================================================= */
+
+        .competition-list-section {
+            padding: 110px 0 130px;
+
+            background: #111118;
+            color: white;
+        }
+
+        .competition-list-container {
+            width: min(1180px, 92%);
+            margin: auto;
+        }
+
+        .section-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 40px;
+
+            margin-bottom: 55px;
+        }
+
+        .section-mini-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+
+            color: rgba(255,255,255,.5);
+        }
+
+        .section-mini-label span {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: white;
+        }
+
+        .section-top h2 {
+            margin: 12px 0 0;
+
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: clamp(40px, 5vw, 65px);
+            line-height: 1;
+
+            letter-spacing: -3px;
+        }
+
+        .section-top h2 em {
+            font-family: "Instrument Serif", serif;
+            font-weight: 400;
+        }
+
+        .section-top p {
+            max-width: 380px;
+
+            margin: 0;
+
+            font-size: 14px;
+            line-height: 1.7;
+
+            color: rgba(255,255,255,.5);
+        }
+
+
+        /* =========================================================
+           ARVEXA CARD
+        ========================================================= */
+
+        .arvexa-card {
+            position: relative;
+
+            min-height: 560px;
+
+            display: grid;
+            grid-template-columns: 1fr .85fr;
+
+            overflow: hidden;
+
+            border-radius: 32px;
+
+            background:
+                radial-gradient(
+                    circle at 80% 20%,
+                    rgba(157, 82, 255, .30),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 20% 90%,
+                    rgba(255, 92, 143, .20),
+                    transparent 35%
+                ),
+                #1a1a24;
+
+            border: 1px solid rgba(255,255,255,.10);
+
+            transition:
+                transform .5s ease,
+                border-color .5s ease,
+                box-shadow .5s ease;
+        }
+
+        .arvexa-card:hover {
+            transform: translateY(-8px);
+
+            border-color: rgba(255,255,255,.25);
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,.35);
+        }
+
+
+        /* =========================================================
+           CARD CONTENT
+        ========================================================= */
+
+        .arvexa-content {
+            position: relative;
+            z-index: 3;
+
+            padding: 75px;
+        }
+
+        .arvexa-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+
+            padding: 8px 14px;
+
+            border-radius: 50px;
+
+            background: rgba(255,255,255,.07);
+            border: 1px solid rgba(255,255,255,.12);
+
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #73e6a3;
+
+            box-shadow:
+                0 0 0 5px rgba(115,230,163,.10);
+
+            animation: statusPulse 2s infinite;
+        }
+
+        @keyframes statusPulse {
+
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: .45;
+            }
+
+            100% {
+                opacity: 1;
+            }
+
+        }
+
+        .arvexa-presented {
+            margin-top: 38px;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            letter-spacing: 3px;
+
+            color: rgba(255,255,255,.45);
+        }
+
+        .arvexa-title {
+            margin: 15px 0 25px;
+
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: clamp(65px, 8vw, 115px);
+            line-height: .8;
+
+            letter-spacing: -7px;
+        }
+
+        .arvexa-title span {
+            display: block;
+
+            font-family: "Instrument Serif", serif;
+
+            font-style: italic;
+            font-weight: 400;
+
+            letter-spacing: -2px;
+        }
+
+        .arvexa-description {
+            max-width: 560px;
+
+            font-size: 16px;
+            line-height: 1.8;
+
+            color: rgba(255,255,255,.62);
+        }
+
+
+        /* =========================================================
+           META
+        ========================================================= */
+
+        .arvexa-meta {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin: 32px 0;
+        }
+
+        .meta-item {
+            padding: 11px 15px;
+
+            border-radius: 8px;
+
+            background: rgba(255,255,255,.06);
+            border: 1px solid rgba(255,255,255,.09);
+
+            font-size: 11px;
+            font-weight: 600;
+
+            color: rgba(255,255,255,.7);
+        }
+
+
+        /* =========================================================
+           BUTTON
+        ========================================================= */
+
+        .arvexa-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+
+            padding: 16px 22px;
+
+            border-radius: 50px;
+
+            background: white;
+            color: #111118;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            transition:
+                transform .3s ease,
+                gap .3s ease;
+        }
+
+        .arvexa-button:hover {
+            transform: translateY(-3px);
+            gap: 20px;
+        }
+
+        .arvexa-button i {
+            font-size: 11px;
+        }
+
+
+        /* =========================================================
+           ARVEXA VISUAL
+        ========================================================= */
+
+        .arvexa-visual {
+            position: relative;
+
+            min-height: 560px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .visual-ring {
+            position: absolute;
+
+            width: 400px;
+            height: 400px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255,255,255,.12);
+        }
+
+        .visual-ring::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 35px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255,255,255,.08);
+        }
+
+        .visual-ring::after {
+            content: "";
+
+            position: absolute;
+
+            inset: 75px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255,255,255,.06);
+        }
+
+        .visual-year {
+            position: absolute;
+
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: 190px;
+            font-weight: 700;
+
+            line-height: 1;
+
+            color: rgba(255,255,255,.045);
+
+            letter-spacing: -15px;
+        }
+
+        .visual-center {
+            position: relative;
+            z-index: 2;
+
+            width: 175px;
+            height: 175px;
+
+            border-radius: 50%;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(255,255,255,.06);
+
+            border: 1px solid rgba(255,255,255,.16);
+
+            backdrop-filter: blur(15px);
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,.25);
+
+            animation: visualFloat 5s ease-in-out infinite;
+        }
+
+        .visual-center strong {
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: 35px;
+            letter-spacing: -2px;
+        }
+
+        .visual-center span {
+            margin-top: 5px;
+
+            font-size: 9px;
+            font-weight: 700;
+
+            letter-spacing: 3px;
+
+            color: rgba(255,255,255,.5);
+        }
+
+        .visual-star {
+            position: absolute;
+
+            font-size: 55px;
+
+            color: white;
+
+            top: 15%;
+            right: 15%;
+
+            animation: starFloat 4s ease-in-out infinite;
+        }
+
+        .visual-star-two {
+            position: absolute;
+
+            font-size: 25px;
+
+            color: rgba(255,255,255,.5);
+
+            bottom: 18%;
+            left: 15%;
+
+            animation: starFloat 3s ease-in-out infinite reverse;
+        }
+
+        @keyframes visualFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-14px);
+            }
+
+        }
+
+        @keyframes starFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0);
+            }
+
+            50% {
+                transform: translateY(-10px) rotate(10deg);
+            }
+
+        }
+
+
+        /* =========================================================
+           INFORMATION STRIP
+        ========================================================= */
+
+        .competition-info {
+            padding: 0 0 120px;
+
+            background: #111118;
+        }
+
+        .info-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            border-top: 1px solid rgba(255,255,255,.1);
+            border-bottom: 1px solid rgba(255,255,255,.1);
+        }
+
+        .info-item {
+            padding: 35px;
+
+            border-right: 1px solid rgba(255,255,255,.1);
+        }
+
+        .info-item:last-child {
+            border-right: none;
+        }
+
+        .info-item span {
+            display: block;
+
+            margin-bottom: 10px;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            letter-spacing: 2px;
+
+            color: rgba(255,255,255,.35);
+        }
+
+        .info-item strong {
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: 21px;
+
+            color: white;
+        }
+
+
+        /* =========================================================
+           BOTTOM CTA
+        ========================================================= */
+
+        .competition-cta {
+            padding: 120px 0;
+
+            background: #fafafa;
+
+            text-align: center;
+        }
+
+        .competition-cta-container {
+            width: min(800px, 90%);
+            margin: auto;
+        }
+
+        .competition-cta h2 {
+            margin: 0;
+
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: clamp(45px, 7vw, 85px);
+
+            line-height: .9;
+
+            letter-spacing: -5px;
+        }
+
+        .competition-cta h2 em {
+            font-family: "Instrument Serif", serif;
+
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .competition-cta p {
+            max-width: 550px;
+
+            margin: 30px auto;
+
+            color: #666;
+
+            line-height: 1.7;
+        }
+
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            margin-top: 15px;
+
+            color: #111118;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .back-home:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 900px) {
+
+            .competition-hero-container {
+                padding: 110px 0 80px;
+            }
+
+            .arvexa-card {
+                grid-template-columns: 1fr;
+            }
+
+            .arvexa-content {
+                padding: 55px 40px;
+            }
+
+            .arvexa-visual {
+                min-height: 420px;
+            }
+
+            .visual-ring {
+                width: 300px;
+                height: 300px;
+            }
+
+            .visual-year {
+                font-size: 145px;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .competition-hero h1 {
+                letter-spacing: -5px;
+            }
+
+            .competition-hero-description {
+                font-size: 15px;
+            }
+
+            .section-top {
+                display: block;
+            }
+
+            .section-top p {
+                margin-top: 20px;
+            }
+
+            .arvexa-content {
+                padding: 45px 25px;
+            }
+
+            .arvexa-title {
+                font-size: 70px;
+                letter-spacing: -5px;
+            }
+
+            .arvexa-description {
+                font-size: 14px;
+            }
+
+            .arvexa-visual {
+                min-height: 350px;
+            }
+
+            .visual-ring {
+                width: 250px;
+                height: 250px;
+            }
+
+            .visual-center {
+                width: 135px;
+                height: 135px;
+            }
+
+            .visual-center strong {
+                font-size: 27px;
+            }
+
+            .visual-year {
+                font-size: 110px;
+            }
+
+            .visual-star {
+                right: 8%;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-item {
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,.1);
+            }
+
+            .info-item:last-child {
+                border-bottom: none;
+            }
+
+            .competition-cta {
+                padding: 90px 0;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<header class="navbar" id="navbar">
+
+    <a href="index.html" class="logo-area">
+
+        <img src="images/logo (2).jpg"
+             alt="Quadra Froyn Logo">
+
+        <div>
+
+            <strong>Quadra Froyn</strong>
+
+            <span>
+                Solutions & Technologies
+            </span>
+
+        </div>
+
+    </a>
+
+
+    <nav class="desktop-nav">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="services.html">
+            Services
+        </a>
+
+        <a href="work.html">
+            Work
+        </a>
+
+        <a href="training.html">
+            Training
+        </a>
+
+        <a href="competitions.html" class="active">
+            Competitions
+        </a>
+
+    </nav>
+
+
+    <a href="contact.html" class="nav-button">
+
+        Let's Talk
+
+        <i class="fa-solid fa-arrow-right"></i>
+
+    </a>
+
+
+    <button class="menu-button" id="menuButton">
+
+        <i class="fa-solid fa-bars"></i>
+
+    </button>
+
+</header>
+
+
+
+<!-- =========================================================
+     MOBILE MENU
+========================================================= -->
+
+<div class="mobile-menu" id="mobileMenu">
+
+    <button class="close-menu" id="closeMenu">
+
+        <i class="fa-solid fa-xmark"></i>
+
+    </button>
+
+    <a href="index.html">
+        Home
+    </a>
+
+    <a href="about.html">
+        About
+    </a>
+
+    <a href="services.html">
+        Services
+    </a>
+
+    <a href="work.html">
+        Work
+    </a>
+
+    <a href="training.html">
+        Training
+    </a>
+
+    <a href="competitions.html">
+        Competitions
+    </a>
+
+    <a href="contact.html">
+        Contact
+    </a>
+
+</div>
+
+
+
+<main class="competition-page">
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="competition-hero">
+
+    <div class="hero-shape hero-shape-one"></div>
+
+    <div class="hero-shape hero-shape-two"></div>
+
+    <div class="hero-star">
+        ✦
+    </div>
+
+
+    <div class="competition-hero-container">
+
+        <div class="competition-label">
+
+            <span></span>
+
+            QUADRA FROYN · COMPETITIONS
+
+        </div>
+
+
+        <h1>
+
+            Challenge
+            <em>yourself.</em>
+
+        </h1>
+
+
+        <p class="competition-hero-description">
+
+            Ideas become stronger when they are tested.
+            Explore competitions designed to challenge
+            creativity, technical skills, problem solving
+            and innovation.
+
+        </p>
+
+
+        <a href="#competitions"
+           class="hero-scroll">
+
+            EXPLORE COMPETITION
+
+            <i class="fa-solid fa-arrow-down"></i>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     COMPETITION SECTION
+========================================================= -->
+
+<section class="competition-list-section"
+         id="competitions">
+
+    <div class="competition-list-container">
+
+
+        <div class="section-top">
+
+            <div>
+
+                <div class="section-mini-label">
+
+                    <span></span>
+
+                    FEATURED COMPETITION
+
+                </div>
+
+
+                <h2>
+
+                    Think.
+                    <em>Build.</em>
+                    Solve.
+
+                </h2>
+
+            </div>
+
+
+            <p>
+
+                Discover the latest competition from
+                Quadra Froyn and take your skills beyond
+                the classroom.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ARVEXA 2026 CARD
+        ================================================= -->
+
+        <a href=" https://arvexacompleted.vercel.app"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="arvexa-card">
+
+
+            <div class="arvexa-content">
+
+
+                <div class="arvexa-status">
+
+                    <span class="status-dot"></span>
+
+                    FEATURED · 2026
+
+                </div>
+
+
+                <div class="arvexa-presented">
+
+                    QUADRA FROYN PRESENTS
+
+                </div>
+
+
+                <h3 class="arvexa-title">
+
+                    ARVEXA
+
+                    <span>
+                        2026
+                    </span>
+
+                </h3>
+
+
+                <p class="arvexa-description">
+
+                    A platform for curious minds to
+                    compete, create, solve problems and
+                    demonstrate their technical abilities.
+
+                    Step into the challenge and discover
+                    what you can build.
+
+                </p>
+
+
+                <div class="arvexa-meta">
+
+                    <div class="meta-item">
+                        2026 EDITION
+                    </div>
+
+                    <div class="meta-item">
+                        3 CHALLENGES
+                    </div>
+
+                    <div class="meta-item">
+                        OPEN FOR REGISTRATION
+                    </div>
+
+                </div>
+
+
+                <span class="arvexa-button">
+
+                    Explore ARVEXA 2026
+
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                </span>
+
+
+            </div>
+
+
+
+            <!-- VISUAL -->
+
+            <div class="arvexa-visual">
+
+                <div class="visual-ring"></div>
+
+                <div class="visual-year">
+                    26
+                </div>
+
+                <div class="visual-center">
+
+                    <strong>
+                        ARVEXA
+                    </strong>
+
+                    <span>
+                        2026
+                    </span>
+
+                </div>
+
+
+                <div class="visual-star">
+                    ✦
+                </div>
+
+                <div class="visual-star-two">
+                    ✦
+                </div>
+
+            </div>
+
+
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     INFORMATION
+========================================================= -->
+
+<section class="competition-info">
+
+    <div class="competition-list-container">
+
+        <div class="info-grid">
+
+
+            <div class="info-item">
+
+                <span>
+                    EVENT
+                </span>
+
+                <strong>
+                    ARVEXA 2026
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <span>
+                    CHALLENGES
+                </span>
+
+                <strong>
+                    3 Challenges
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <span>
+                    PLATFORM
+                </span>
+
+                <strong>
+                    Online Competition Portal
+                </strong>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     CTA
+========================================================= -->
+
+<section class="competition-cta">
+
+    <div class="competition-cta-container">
+
+
+        <h2>
+
+            Ready to
+            <em>compete?</em>
+
+        </h2>
+
+
+        <p>
+
+            Explore ARVEXA 2026, discover the challenges
+            and take your next step.
+
+        </p>
+
+
+        <a href="https://arvexa-2026.vercel.app/"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="button primary-button">
+
+            Visit ARVEXA 2026
+
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+
+        <br>
+
+
+        <a href="index.html"
+           class="back-home">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back to Quadra Froyn
+
+        </a>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+
+            <div class="footer-brand">
+
+                <a href="index.html"
+                   class="footer-logo">
+
+                    <img src="images/logo (2).jpg"
+                         alt="Quadra Froyn">
+
+                    <span>
+                        Quadra Froyn
+                    </span>
+
+                </a>
+
+
+                <p>
+
+                    Building intelligent digital solutions
+                    and empowering the next generation
+                    through technology and practical learning.
+
+                </p>
+
+
+                <div class="social-links">
+
+                    <a href="https://www.linkedin.com/company/quadrafroynsolutions"
+                       target="_blank"
+                       rel="noopener">
+
+                        <i class="fa-brands fa-linkedin-in"></i>
+
+                    </a>
+
+
+                    <a href="https://github.com/quadrafroyn2026"
+                       target="_blank"
+                       rel="noopener">
+
+                        <i class="fa-brands fa-github"></i>
+
+                    </a>
+
+
+                    <a href="https://www.instagram.com/quadrafroyn_/"
+                       target="_blank"
+                       rel="noopener">
+
+                        <i class="fa-brands fa-instagram"></i>
+
+                    </a>
+
+
+                    <a href="https://www.youtube.com/@QuadraFroynSolutions"
+                       target="_blank"
+                       rel="noopener">
+
+                        <i class="fa-brands fa-youtube"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Explore
+                </h4>
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="about.html">
+                    About
+                </a>
+
+                <a href="services.html">
+                    Services
+                </a>
+
+                <a href="work.html">
+                    Work
+                </a>
+
+                <a href="competitions.html">
+                    Competitions
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Learning
+                </h4>
+
+                <a href="training.html">
+                    Training
+                </a>
+
+                <a href="training.html">
+                    Internships
+                </a>
+
+                <a href="training.html">
+                    Workshops
+                </a>
+
+                <a href="training.html">
+                    Career Guidance
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Contact
+                </h4>
+
+                <a href="mailto:quadrafroyn@gmail.com">
+                    quadrafroyn@gmail.com
+                </a>
+
+                <a href="tel:+918667662960">
+                    8667662960
+                </a>
+
+                <a href="tel:+918870141195">
+                    8870141195
+                </a>
+
+                <span>
+                    Aruppukottai,
+                    Virudhunagar,
+                    Tamil Nadu
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="footer-bottom">
+
+            <span>
+
+                © 2026 Quadra Froyn Solutions and Technologies.
+                All rights reserved.
+
+            </span>
+
+
+            <a href="#top">
+
+                Back to top ↑
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+</footer>
+
+
+
+<!-- =========================================================
+     SCRIPT
+========================================================= -->
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
