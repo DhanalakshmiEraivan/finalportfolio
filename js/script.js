@@ -742,5 +742,177 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.add(
         "js-ready"
     );
+/* =========================================================
+   SMART CHILD GALLERY
+========================================================= */
 
+document.addEventListener("DOMContentLoaded", function () {
+
+    const gallery = document.getElementById("smartGallery");
+
+    if (!gallery) return;
+
+    const galleryItems =
+        gallery.querySelectorAll(".gallery-item");
+
+    if (!galleryItems.length) return;
+
+
+    /* Create Lightbox */
+
+    const lightbox = document.createElement("div");
+
+    lightbox.className = "gallery-lightbox";
+
+    lightbox.innerHTML = `
+        <button class="lightbox-close"
+                aria-label="Close gallery">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <img src="" alt="Smart Child Program">
+
+        <div class="lightbox-counter">
+            01 / ${String(galleryItems.length).padStart(2, "0")}
+        </div>
+    `;
+
+    document.body.appendChild(lightbox);
+
+
+    const lightboxImage =
+        lightbox.querySelector("img");
+
+    const closeButton =
+        lightbox.querySelector(".lightbox-close");
+
+    const counter =
+        lightbox.querySelector(".lightbox-counter");
+
+
+    let currentImage = 0;
+
+
+    /* Open Image */
+
+    function openImage(index) {
+
+        currentImage = index;
+
+        const image =
+            galleryItems[index].querySelector("img");
+
+        if (!image) return;
+
+        lightboxImage.src = image.src;
+
+        lightboxImage.alt =
+            image.alt || "Smart Child Program";
+
+        counter.textContent =
+            `${String(index + 1).padStart(2, "0")} / ${String(galleryItems.length).padStart(2, "0")}`;
+
+        lightbox.classList.add("active");
+
+        document.body.style.overflow = "hidden";
+    }
+
+
+    /* Close Image */
+
+    function closeImage() {
+
+        lightbox.classList.remove("active");
+
+        document.body.style.overflow = "";
+    }
+
+
+    /* Gallery Click */
+
+    galleryItems.forEach((item, index) => {
+
+        item.addEventListener("click", function () {
+
+            openImage(index);
+
+        });
+
+    });
+
+
+    /* Close Button */
+
+    closeButton.addEventListener(
+        "click",
+        closeImage
+    );
+
+
+    /* Click Outside */
+
+    lightbox.addEventListener(
+        "click",
+        function (event) {
+
+            if (event.target === lightbox) {
+
+                closeImage();
+
+            }
+
+        }
+    );
+
+
+    /* Keyboard Controls */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (!lightbox.classList.contains("active")) {
+                return;
+            }
+
+
+            /* ESC */
+
+            if (event.key === "Escape") {
+
+                closeImage();
+
+            }
+
+
+            /* Next */
+
+            if (event.key === "ArrowRight") {
+
+                currentImage =
+                    (currentImage + 1) %
+                    galleryItems.length;
+
+                openImage(currentImage);
+
+            }
+
+
+            /* Previous */
+
+            if (event.key === "ArrowLeft") {
+
+                currentImage =
+                    (currentImage - 1 +
+                    galleryItems.length) %
+                    galleryItems.length;
+
+                openImage(currentImage);
+
+            }
+
+        }
+    );
+
+});
 });
