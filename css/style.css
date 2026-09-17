@@ -14186,3 +14186,157 @@ img {
     }
 
 }
+/* =========================================================
+   MOBILE MENU FIX
+   ========================================================= */
+
+.menu-button {
+    display: none;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font-size: 23px;
+    color: #171717;
+    padding: 8px;
+    z-index: 1002;
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+
+    width: min(85%, 360px);
+    height: 100vh;
+
+    background: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+
+    padding: 90px 28px 40px;
+
+    box-shadow: -15px 0 40px rgba(0, 0, 0, 0.15);
+
+    z-index: 1001;
+
+    overflow-y: auto;
+
+    transition: right 0.35s ease;
+}
+
+/* OPEN STATE */
+.mobile-menu.open {
+    right: 0;
+}
+
+/* CLOSE BUTTON */
+.close-menu {
+    position: absolute;
+
+    top: 20px;
+    right: 20px;
+
+    width: 42px;
+    height: 42px;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: #f2f2f2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    font-size: 19px;
+    color: #171717;
+}
+
+/* MOBILE LINKS */
+.mobile-menu a {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    padding: 15px 14px;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    color: #171717;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.mobile-menu a:hover,
+.mobile-menu a.active {
+    background: #f2efff;
+    color: #5b36d6;
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   MOBILE SCREEN
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .desktop-nav {
+        display: none !important;
+    }
+
+    .navbar .nav-button {
+        display: none;
+    }
+
+    .menu-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .navbar {
+        padding: 14px 20px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .navbar {
+        padding: 12px 15px;
+    }
+
+    .mobile-menu {
+        width: 88%;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .mobile-menu a {
+        font-size: 17px;
+        padding: 14px 12px;
+    }
+
+}
