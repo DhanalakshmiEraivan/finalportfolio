@@ -4,10 +4,14 @@ document.addEventListener("DOMContentLoaded", () => {
        ELEMENTS
     ===================================================== */
 
-    const nav = document.getElementById("nav");
+    const navbar = document.getElementById("navbar");
     const topBtn = document.getElementById("topBtn");
-    const menuBtn = document.getElementById("menuBtn");
+
+    // IMPORTANT:
+    // These IDs match your index.html
+    const menuButton = document.getElementById("menuButton");
     const mobileMenu = document.getElementById("mobileMenu");
+    const closeMenu = document.getElementById("closeMenu");
 
 
     /* =====================================================
@@ -18,8 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const scrollPosition = window.scrollY;
 
-        if (nav) {
-            nav.classList.toggle(
+        if (navbar) {
+            navbar.classList.toggle(
                 "scrolled",
                 scrollPosition > 40
             );
@@ -31,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 scrollPosition > 600
             );
         }
-
     }
 
     window.addEventListener(
@@ -48,96 +51,127 @@ document.addEventListener("DOMContentLoaded", () => {
        MOBILE MENU
     ===================================================== */
 
-    function closeMobileMenu() {
-
-        if (!mobileMenu) return;
-
-        mobileMenu.classList.remove("open");
-
-        if (menuBtn) {
-
-            menuBtn.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-            const icon = menuBtn.querySelector("i");
-
-            if (icon) {
-
-                icon.classList.remove(
-                    "fa-xmark"
-                );
-
-                icon.classList.add(
-                    "fa-bars"
-                );
-
-            }
-
-        }
-
-    }
-
-
     function openMobileMenu() {
 
         if (!mobileMenu) return;
 
         mobileMenu.classList.add("open");
 
-        if (menuBtn) {
+        if (menuButton) {
 
-            menuBtn.setAttribute(
+            menuButton.setAttribute(
                 "aria-expanded",
                 "true"
             );
 
-            const icon = menuBtn.querySelector("i");
+            const icon =
+                menuButton.querySelector("i");
 
             if (icon) {
 
-                icon.classList.remove(
-                    "fa-bars"
-                );
+                icon.classList.remove("fa-bars");
 
-                icon.classList.add(
-                    "fa-xmark"
-                );
+                icon.classList.add("fa-xmark");
 
             }
-
         }
 
+        document.body.classList.add("menu-open");
     }
 
 
-    if (menuBtn && mobileMenu) {
+    function closeMobileMenu() {
 
-        // Initial accessibility state
-        menuBtn.setAttribute(
+        if (!mobileMenu) return;
+
+        mobileMenu.classList.remove("open");
+
+        if (menuButton) {
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+            const icon =
+                menuButton.querySelector("i");
+
+            if (icon) {
+
+                icon.classList.remove("fa-xmark");
+
+                icon.classList.add("fa-bars");
+
+            }
+        }
+
+        document.body.classList.remove("menu-open");
+    }
+
+
+    /* =====================================================
+       MOBILE MENU BUTTON
+    ===================================================== */
+
+    if (menuButton && mobileMenu) {
+
+        menuButton.setAttribute(
             "aria-expanded",
             "false"
         );
 
-        menuBtn.addEventListener(
+        menuButton.setAttribute(
+            "aria-label",
+            "Open navigation menu"
+        );
+
+
+        menuButton.addEventListener(
             "click",
-            () => {
+            (event) => {
+
+                event.stopPropagation();
 
                 const isOpen =
                     mobileMenu.classList.contains("open");
 
                 if (isOpen) {
-                    closeMobileMenu();
-                } else {
-                    openMobileMenu();
-                }
 
+                    closeMobileMenu();
+
+                } else {
+
+                    openMobileMenu();
+
+                }
             }
         );
 
 
-        /* Close menu when clicking a link */
+        /* =================================================
+           CLOSE BUTTON
+        ================================================= */
+
+        if (closeMenu) {
+
+            closeMenu.addEventListener(
+                "click",
+                (event) => {
+
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    closeMobileMenu();
+
+                }
+            );
+
+        }
+
+
+        /* =================================================
+           CLOSE WHEN LINK IS CLICKED
+        ================================================= */
 
         mobileMenu
             .querySelectorAll("a")
@@ -146,14 +180,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 link.addEventListener(
                     "click",
                     () => {
+
                         closeMobileMenu();
+
                     }
                 );
 
             });
 
 
-        /* Close menu with Escape key */
+        /* =================================================
+           CLOSE WITH ESCAPE
+        ================================================= */
 
         document.addEventListener(
             "keydown",
@@ -172,14 +210,49 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-        /* Close menu if window becomes desktop size */
+        /* =================================================
+           CLOSE WHEN CLICKING OUTSIDE
+        ================================================= */
+
+        document.addEventListener(
+            "click",
+            event => {
+
+                if (
+                    !mobileMenu.classList.contains("open")
+                ) {
+                    return;
+                }
+
+                const clickedInsideMenu =
+                    mobileMenu.contains(event.target);
+
+                const clickedMenuButton =
+                    menuButton.contains(event.target);
+
+                if (
+                    !clickedInsideMenu &&
+                    !clickedMenuButton
+                ) {
+
+                    closeMobileMenu();
+
+                }
+
+            }
+        );
+
+
+        /* =================================================
+           CLOSE WHEN SWITCHING TO DESKTOP
+        ================================================= */
 
         window.addEventListener(
             "resize",
             () => {
 
                 if (
-                    window.innerWidth > 950 &&
+                    window.innerWidth > 768 &&
                     mobileMenu.classList.contains("open")
                 ) {
 
@@ -270,14 +343,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     } else {
 
-        // Fallback for older browsers
-
         revealElements.forEach(
             element => {
 
-                element.classList.add(
-                    "show"
-                );
+                element.classList.add("show");
 
             }
         );
@@ -301,12 +370,13 @@ document.addEventListener("DOMContentLoaded", () => {
                         link.getAttribute("href");
 
 
-                    // Ignore empty "#"
                     if (
                         !id ||
                         id === "#"
                     ) {
+
                         return;
+
                     }
 
 
@@ -333,7 +403,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =====================================================
        ABOUT PAGE - WORD REVEAL
-       Works if the about text exists
     ===================================================== */
 
     const aboutText =
@@ -346,9 +415,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ) {
 
         const words =
-            aboutText.querySelectorAll(
-                ".word"
-            );
+            aboutText.querySelectorAll(".word");
 
 
         if (words.length) {
@@ -369,9 +436,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
                                             setTimeout(
                                                 () => {
+
                                                     word.classList.add(
                                                         "on"
                                                     );
+
                                                 },
                                                 index * 55
                                             );
@@ -410,9 +479,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ===================================================== */
 
     const aboutVisual =
-        document.querySelector(
-            ".about-visual"
-        );
+        document.querySelector(".about-visual");
 
 
     if (
@@ -475,13 +542,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =====================================================
        CONTACT FORM
-       Works only when #contactForm exists
     ===================================================== */
 
     const contactForm =
-        document.getElementById(
-            "contactForm"
-        );
+        document.getElementById("contactForm");
 
 
     if (contactForm) {
@@ -551,7 +615,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const navigationLinks =
         document.querySelectorAll(
-            ".nav-links a, .mobile-menu a"
+            ".desktop-nav a, .mobile-menu a"
         );
 
 
@@ -565,10 +629,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!href) return;
 
 
-            // Ignore pure section links
-            if (
-                href.startsWith("#")
-            ) {
+            if (href.startsWith("#")) {
                 return;
             }
 
@@ -584,9 +645,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 linkPage === currentPage
             ) {
 
-                link.classList.add(
-                    "active"
-                );
+                link.classList.add("active");
 
             }
 
@@ -596,13 +655,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =====================================================
        HERO PARALLAX
-       Works only if .hero-art exists
     ===================================================== */
 
     const heroArt =
-        document.querySelector(
-            ".hero-art"
-        );
+        document.querySelector(".hero-art");
 
 
     if (
@@ -613,9 +669,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ) {
 
         const mainBlob =
-            heroArt.querySelector(
-                ".blob-main"
-            );
+            heroArt.querySelector(".blob-main");
 
 
         if (mainBlob) {
@@ -657,6 +711,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 () => {
 
                     mainBlob.style.marginTop = "";
+
                     mainBlob.style.marginLeft = "";
 
                 }
@@ -668,53 +723,271 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       CLOSE MOBILE MENU WHEN CLICKING OUTSIDE
+       SMART CHILD GALLERY
     ===================================================== */
 
-    document.addEventListener(
-        "click",
-        event => {
-
-            if (
-                !mobileMenu ||
-                !menuBtn
-            ) {
-                return;
-            }
+    const gallery =
+        document.getElementById("smartGallery");
 
 
-            if (
-                !mobileMenu.classList.contains(
-                    "open"
-                )
-            ) {
-                return;
-            }
+    if (gallery) {
+
+        const galleryItems =
+            gallery.querySelectorAll(
+                ".gallery-item"
+            );
 
 
-            const clickedInsideMenu =
-                mobileMenu.contains(
-                    event.target
+        if (galleryItems.length) {
+
+            /* =============================================
+               CREATE LIGHTBOX
+            ============================================= */
+
+            const lightbox =
+                document.createElement("div");
+
+            lightbox.className =
+                "gallery-lightbox";
+
+
+            lightbox.innerHTML = `
+
+                <button
+                    class="lightbox-close"
+                    aria-label="Close gallery">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+                <img
+                    src=""
+                    alt="Smart Child Program">
+
+                <div class="lightbox-counter">
+                    01 / ${String(
+                        galleryItems.length
+                    ).padStart(2, "0")}
+                </div>
+
+            `;
+
+
+            document.body.appendChild(
+                lightbox
+            );
+
+
+            const lightboxImage =
+                lightbox.querySelector("img");
+
+
+            const galleryClose =
+                lightbox.querySelector(
+                    ".lightbox-close"
                 );
 
 
-            const clickedMenuButton =
-                menuBtn.contains(
-                    event.target
+            const counter =
+                lightbox.querySelector(
+                    ".lightbox-counter"
                 );
 
 
-            if (
-                !clickedInsideMenu &&
-                !clickedMenuButton
-            ) {
+            let currentImage = 0;
 
-                closeMobileMenu();
+
+            /* =============================================
+               OPEN IMAGE
+            ============================================= */
+
+            function openImage(index) {
+
+                currentImage = index;
+
+
+                const image =
+                    galleryItems[index]
+                        .querySelector("img");
+
+
+                if (!image) return;
+
+
+                lightboxImage.src =
+                    image.src;
+
+
+                lightboxImage.alt =
+                    image.alt ||
+                    "Smart Child Program";
+
+
+                counter.textContent =
+                    `${String(index + 1).padStart(2, "0")} / ${String(galleryItems.length).padStart(2, "0")}`;
+
+
+                lightbox.classList.add(
+                    "active"
+                );
+
+
+                document.body.classList.add(
+                    "gallery-open"
+                );
 
             }
+
+
+            /* =============================================
+               CLOSE IMAGE
+            ============================================= */
+
+            function closeImage() {
+
+                lightbox.classList.remove(
+                    "active"
+                );
+
+
+                document.body.classList.remove(
+                    "gallery-open"
+                );
+
+            }
+
+
+            /* =============================================
+               GALLERY ITEMS
+            ============================================= */
+
+            galleryItems.forEach(
+                (item, index) => {
+
+                    item.addEventListener(
+                        "click",
+                        () => {
+
+                            openImage(index);
+
+                        }
+                    );
+
+                }
+            );
+
+
+            /* =============================================
+               CLOSE BUTTON
+            ============================================= */
+
+            if (galleryClose) {
+
+                galleryClose.addEventListener(
+                    "click",
+                    closeImage
+                );
+
+            }
+
+
+            /* =============================================
+               CLICK OUTSIDE IMAGE
+            ============================================= */
+
+            lightbox.addEventListener(
+                "click",
+                event => {
+
+                    if (
+                        event.target === lightbox
+                    ) {
+
+                        closeImage();
+
+                    }
+
+                }
+            );
+
+
+            /* =============================================
+               KEYBOARD CONTROLS
+            ============================================= */
+
+            document.addEventListener(
+                "keydown",
+                event => {
+
+                    if (
+                        !lightbox.classList.contains(
+                            "active"
+                        )
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    /* ESC */
+
+                    if (
+                        event.key === "Escape"
+                    ) {
+
+                        closeImage();
+
+                    }
+
+
+                    /* NEXT */
+
+                    if (
+                        event.key === "ArrowRight"
+                    ) {
+
+                        currentImage =
+                            (
+                                currentImage + 1
+                            ) %
+                            galleryItems.length;
+
+
+                        openImage(
+                            currentImage
+                        );
+
+                    }
+
+
+                    /* PREVIOUS */
+
+                    if (
+                        event.key === "ArrowLeft"
+                    ) {
+
+                        currentImage =
+                            (
+                                currentImage - 1 +
+                                galleryItems.length
+                            ) %
+                            galleryItems.length;
+
+
+                        openImage(
+                            currentImage
+                        );
+
+                    }
+
+                }
+            );
 
         }
-    );
+
+    }
 
 
     /* =====================================================
@@ -742,177 +1015,5 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.add(
         "js-ready"
     );
-/* =========================================================
-   SMART CHILD GALLERY
-========================================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
-
-    const gallery = document.getElementById("smartGallery");
-
-    if (!gallery) return;
-
-    const galleryItems =
-        gallery.querySelectorAll(".gallery-item");
-
-    if (!galleryItems.length) return;
-
-
-    /* Create Lightbox */
-
-    const lightbox = document.createElement("div");
-
-    lightbox.className = "gallery-lightbox";
-
-    lightbox.innerHTML = `
-        <button class="lightbox-close"
-                aria-label="Close gallery">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
-
-        <img src="" alt="Smart Child Program">
-
-        <div class="lightbox-counter">
-            01 / ${String(galleryItems.length).padStart(2, "0")}
-        </div>
-    `;
-
-    document.body.appendChild(lightbox);
-
-
-    const lightboxImage =
-        lightbox.querySelector("img");
-
-    const closeButton =
-        lightbox.querySelector(".lightbox-close");
-
-    const counter =
-        lightbox.querySelector(".lightbox-counter");
-
-
-    let currentImage = 0;
-
-
-    /* Open Image */
-
-    function openImage(index) {
-
-        currentImage = index;
-
-        const image =
-            galleryItems[index].querySelector("img");
-
-        if (!image) return;
-
-        lightboxImage.src = image.src;
-
-        lightboxImage.alt =
-            image.alt || "Smart Child Program";
-
-        counter.textContent =
-            `${String(index + 1).padStart(2, "0")} / ${String(galleryItems.length).padStart(2, "0")}`;
-
-        lightbox.classList.add("active");
-
-        document.body.style.overflow = "hidden";
-    }
-
-
-    /* Close Image */
-
-    function closeImage() {
-
-        lightbox.classList.remove("active");
-
-        document.body.style.overflow = "";
-    }
-
-
-    /* Gallery Click */
-
-    galleryItems.forEach((item, index) => {
-
-        item.addEventListener("click", function () {
-
-            openImage(index);
-
-        });
-
-    });
-
-
-    /* Close Button */
-
-    closeButton.addEventListener(
-        "click",
-        closeImage
-    );
-
-
-    /* Click Outside */
-
-    lightbox.addEventListener(
-        "click",
-        function (event) {
-
-            if (event.target === lightbox) {
-
-                closeImage();
-
-            }
-
-        }
-    );
-
-
-    /* Keyboard Controls */
-
-    document.addEventListener(
-        "keydown",
-        function (event) {
-
-            if (!lightbox.classList.contains("active")) {
-                return;
-            }
-
-
-            /* ESC */
-
-            if (event.key === "Escape") {
-
-                closeImage();
-
-            }
-
-
-            /* Next */
-
-            if (event.key === "ArrowRight") {
-
-                currentImage =
-                    (currentImage + 1) %
-                    galleryItems.length;
-
-                openImage(currentImage);
-
-            }
-
-
-            /* Previous */
-
-            if (event.key === "ArrowLeft") {
-
-                currentImage =
-                    (currentImage - 1 +
-                    galleryItems.length) %
-                    galleryItems.length;
-
-                openImage(currentImage);
-
-            }
-
-        }
-    );
-
-});
 });
