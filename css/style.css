@@ -14944,3 +14944,51 @@ img {
     }
 
 }
+/* =====================================================
+   FORCE DESKTOP LAYOUT TEST
+===================================================== */
+
+@media (min-width: 1101px) {
+
+    .hero-container {
+        display: grid !important;
+        grid-template-columns: 1.05fr 0.95fr !important;
+        align-items: center !important;
+    }
+
+    .desktop-nav {
+        display: flex !important;
+    }
+
+    .navbar .nav-button {
+        display: inline-flex !important;
+    }
+
+    .menu-button {
+        display: none !important;
+    }
+
+    .hero-content {
+        display: block !important;
+        text-align: left !important;
+    }
+
+    .hero-buttons {
+        justify-content: flex-start !important;
+    }
+
+    .hero-mini-stats {
+        justify-content: flex-start !important;
+    }
+
+    .hero-visual {
+        display: grid !important;
+        place-items: center !important;
+    }
+
+    .container {
+        width: min(1180px, calc(100% - 40px)) !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
