@@ -14992,3 +14992,60 @@ img {
         margin-right: auto !important;
     }
 }
+/* =====================================================
+   DESKTOP PAGE LAYOUT
+===================================================== */
+
+@media (min-width: 1101px) {
+
+    /* Main sections */
+    .container,
+    .hero-container {
+        width: min(1240px, calc(100% - 80px));
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Hero must be two columns */
+    .hero-container {
+        display: grid !important;
+        grid-template-columns: 1.05fr 0.95fr !important;
+        gap: 80px !important;
+        align-items: center !important;
+    }
+
+    /* Left side */
+    .hero-content {
+        max-width: 680px;
+        text-align: left !important;
+    }
+
+    /* Right side */
+    .hero-visual {
+        width: 100%;
+        min-height: 580px;
+        display: grid !important;
+        place-items: center !important;
+    }
+
+    /* Hero heading */
+    .hero h1 {
+        font-size: clamp(64px, 6vw, 92px) !important;
+    }
+
+    /* Buttons stay left */
+    .hero-buttons {
+        justify-content: flex-start !important;
+    }
+
+    /* Stats stay left */
+    .hero-mini-stats {
+        justify-content: flex-start !important;
+    }
+
+    /* Desktop circle */
+    .visual-circle {
+        width: 430px;
+        height: 430px;
+    }
+}
